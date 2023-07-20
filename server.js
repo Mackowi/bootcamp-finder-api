@@ -12,7 +12,9 @@ connectDB()
 
 // route files
 const bootcampsRoute = require('./routes/bootcamps')
+const coursesRoute = require('./routes/courses')
 
+//init
 const app = express()
 
 // body parser
@@ -24,6 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // mount routes
 app.use('/api/v1/bootcamps', bootcampsRoute)
+app.use('/api/v1/courses', coursesRoute)
 
 // error middleware
 app.use(errorHandler)
