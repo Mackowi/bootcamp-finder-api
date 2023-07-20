@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv').config({ path: './config/config.env' })
 const morgan = require('morgan')
 const colors = require('colors')
+const errorHandler = require('./middleware/error')
 const connectDB = require('./config/db')
 
 const PORT = process.env.PORT || 5000
@@ -24,14 +25,18 @@ if (process.env.NODE_ENV === 'development') {
 // mount routes
 app.use('/api/v1/bootcamps', bootcampsRoute)
 
+// error middleware
+app.use(errorHandler)
+
 const server = app.listen(
   PORT,
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+    `\n\nServer running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+      .bold
   )
 )
 
-// handle unhandled promise rejection
+// handle unhandled promise rejection (mongodb related)
 process.on('unhandledRejection', (err, promise) => {
   console.log(`Error: ${err.message}`.red)
   // close server and exit
