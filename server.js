@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const colors = require('colors')
 const errorHandler = require('./middleware/error')
 const connectDB = require('./config/db')
+const fileupload = require('express-fileupload')
+const path = require('path')
 
 const PORT = process.env.PORT || 5000
 
@@ -23,6 +25,10 @@ app.use(express.json())
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
+// fileupload
+app.use(fileupload())
+// set static folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 // mount routes
 app.use('/api/v1/bootcamps', bootcampsRoute)
