@@ -6,9 +6,9 @@ const {
   updateCourse,
   deleteCourse,
 } = require('../controllers/courses')
-
 const Course = require('../models/Course')
 const advancedResults = require('../middleware/advancedResults')
+const { protect } = require('../middleware/auth')
 
 // to make it work between bootcamps and routers
 const router = express.Router({ mergeParams: true })
@@ -22,7 +22,11 @@ router
     }),
     getCourses
   )
-  .post(addCourse)
-router.route('/:id').get(getCourse).put(updateCourse).delete(deleteCourse)
+  .post(protect, addCourse)
+router
+  .route('/:id')
+  .get(getCourse)
+  .put(protect, updateCourse)
+  .delete(protect, deleteCourse)
 
 module.exports = router

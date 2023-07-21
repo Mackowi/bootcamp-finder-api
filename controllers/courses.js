@@ -6,7 +6,7 @@ const Bootcamp = require('../models/Bootcamp.js')
 // desc: get courses
 // route: GET /api/vi/courses
 // route: GET /api/vi/bootcamps/:bootcampId/courses
-// methos: Public
+// method: Public
 const getCourses = asyncHandler(async (req, res, next) => {
   if (req.params.bootcampId) {
     const courses = await Course.find({ bootcamp: req.params.bootcampId })
@@ -23,7 +23,7 @@ const getCourses = asyncHandler(async (req, res, next) => {
 
 // desc: get single course
 // route: GET /api/vi/courses/:id
-// methos: Public
+// method: Public
 const getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate({
     path: 'bootcamp',
@@ -40,7 +40,7 @@ const getCourse = asyncHandler(async (req, res, next) => {
 
 // desc: add course
 // route: Post /api/vi/bootcamps/:bootcampId/courses
-// methos: Private
+// method: Private
 const addCourse = asyncHandler(async (req, res, next) => {
   // assigning bootcampId param to req body so during creation the needed bootcampId is there
   req.body.bootcamp = req.params.bootcampId
@@ -62,7 +62,7 @@ const addCourse = asyncHandler(async (req, res, next) => {
 
 // desc: update course
 // route: PUT /api/vi/courses/:id
-// methos: Private
+// method: Private
 const updateCourse = asyncHandler(async (req, res, next) => {
   let course = await Course.findById(req.params.id)
   if (!course) {
@@ -79,10 +79,10 @@ const updateCourse = asyncHandler(async (req, res, next) => {
     data: course,
   })
 })
+
 // desc: delete course
 // route: DELETE /api/vi/courses/:id
-// methos: Private
-
+// method: Private
 const deleteCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id)
   if (!course) {
