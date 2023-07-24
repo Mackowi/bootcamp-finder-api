@@ -7,7 +7,6 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   // loop ofer removeField and delete them from reqQuery
   removeField.forEach((param) => delete reqQuery[param])
   //create query string
-  console.log(reqQuery)
   let queryStr = JSON.stringify(reqQuery)
   // add $ in front of operators for mongodb queries
   queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`)
