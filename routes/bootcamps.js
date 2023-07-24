@@ -14,11 +14,13 @@ const { protect, authorize } = require('../middleware/auth')
 
 // include other resource routers
 const courseRouter = require('./courses')
+const reviewsRouter = require('./reviews')
 
 const router = express.Router()
 
 // re-route into other resourse routers
 router.use('/:bootcampId/courses', courseRouter)
+router.use('/:bootcampId/reviews', reviewsRouter)
 
 router
   .route('/')

@@ -18,6 +18,7 @@ const bootcampsRoute = require('./routes/bootcamps')
 const coursesRoute = require('./routes/courses')
 const authRoute = require('./routes/auth')
 const usersRoute = require('./routes/users')
+const reviewsRoute = require('./routes/reviews')
 
 //init
 const app = express()
@@ -27,7 +28,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // cookie parses
-
 app.use(cookieParser())
 
 // logger
@@ -44,6 +44,7 @@ app.use('/api/v1/bootcamps', bootcampsRoute)
 app.use('/api/v1/courses', coursesRoute)
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/users', usersRoute)
+app.use('/api/v1/reviews', reviewsRoute)
 
 // error middleware
 app.use(errorHandler)
